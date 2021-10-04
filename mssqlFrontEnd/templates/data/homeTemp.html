@@ -1,0 +1,155 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} {temperatures.TemperatureName} {% endblock %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+
+{% block content %}
+
+<script>
+{% block jquery %}
+
+var endpoint ='/api/chart/data/home/temp/'
+var defaultData = []
+var labels = []
+var maxDataValue
+
+$.ajax({
+      method: "GET",
+      url: endpoint,
+      success: function(data){
+        labels = data.x
+        defaultData = data.y
+        setChart()
+        },
+        error: function(error_data){
+          console.log("error")
+          console.log("error_data")
+        }
+    })
+
+function setChart(){
+  var ctx = document.getElementById('myChart2');
+  const max = Math.max.apply(null, Object.values(defaultData));
+  var buffer = 10;
+  var maxValuePlusBuffer = buffer + max;
+
+  var myChart2 = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: labels,
+          datasets: [{
+              label: 'Number of Transmitters Being Watched',
+              data: defaultData,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+            }]
+     },
+     options: {
+         scales: {
+             yAxes: [{
+               ticks: {
+                 beginAtZero: true,
+                 max: maxValuePlusBuffer
+             }
+           }]
+         }
+     }
+  });
+}
+{% endblock jquery %}
+</script>
+
+<div class="row">
+  <div class="col-md-8">
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+      <thead>
+          <tr>
+            <th scope="col">#
+            </th>
+            <th scope="col">Transmitter Name
+            </th>
+            <th scope="col">Value
+            </th>
+            <th scope="col">Time Stamp
+            </th>
+          </tr>
+        </thead>
+      <tbody>
+      {% for temp in temperatures %}
+      <tr>
+        <td scope="row"><small class="text-muted">{{ temp.id }}</small></td>
+        <td><a href="{% url 'temperature-detail' temp.TemperatureName %}">{{ temp.TemperatureName }}</a></td>
+        <td>{{ temp.TemperatureValue }}</td>
+        <td>{{ temp.TemperatureTimeStamp }}</td>
+      </tr>
+      {% endfor %}
+
+  </tbody>
+</table>
+    {% if is_paginated %}
+
+     {% if page_obj.has_previous %}
+       <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+       <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+     {% endif %}
+
+     {% for num in page_obj.paginator.page_range %}
+       {% if page_obj.number == num %}
+         <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+       {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+         <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+       {% endif %}
+     {% endfor %}
+
+     {% if page_obj.has_next %}
+       <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+       <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+     {% endif %}
+
+   {% endif %}
+
+</div>
+
+      <div class="col-md-4">
+        <div class="content-section">
+          <h3>Directory</h3>
+          <p class='text-muted'>
+            <ul class="list-group">
+              {% for i in temp_name_list %}
+              {% ifchanged i.TemperatureName %}
+              <li class="list-group-item list-group-item-light">
+                <a href="{% url 'temperature-detail' i.TemperatureName %}">{{i.TemperatureName}}</a>
+              </li>
+              {% else %}
+              {% endifchanged %}
+              {% endfor %}
+            </ul>
+          </p>
+        </div>
+      </div>
+
+<div class="row">
+  <div class="col-md-12 m-5">
+  </div>
+  <div class="col-md-12">
+    <canvas id="myChart2" width="200" height="100"></canvas>
+  </div>
+</div>
+{% endblock content %}
