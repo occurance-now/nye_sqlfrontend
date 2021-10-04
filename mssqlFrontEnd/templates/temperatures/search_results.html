@@ -9,11 +9,126 @@
 
 
 {% if result %}
-<p>Found {{ result|length }} data point{{ result|pluralize }}.</p>
+<p>Found {{ result|length }} data point{{ result|pluralize }} between {{q1}} and {{q2}}.</p>
 {% else %}
 <p>No products matched your search criteria.</p>
 {% endif %}
+<script>
+{% block jquery %}
 
+var endpoint = "{% url 'chart-tempIdRange' result.0.1 q1 q2 %}"
+var defaultData = []
+var labels = []
+var maxDataValue
+
+$.ajax({
+      method: "GET",
+      url: endpoint,
+      success: function(data){
+        labels = data.x
+        defaultData = data.y
+        labels2 = data.x2
+        defaultData2 = data.y2
+        setChart()
+        setChart2()
+        },
+        error: function(error_data){
+          console.log("error")
+          console.log("error_data")
+        }
+    })
+
+function setChart(){
+  var ctx = document.getElementById('myChart2');
+  const max = Math.max.apply(null, Object.values(defaultData));
+  var buffer = 10;
+  var maxValuePlusBuffer = buffer + max;
+
+  var myChart2 = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: labels,
+          datasets: [{
+              label: '{{result.0.1}}',
+              data: defaultData,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+            }]
+     },
+     options: {
+         scales: {
+             yAxes: [{
+               ticks: {
+                 beginAtZero: true,
+                 max: maxValuePlusBuffer
+             }
+           }]
+         }
+     }
+  });
+}
+
+function setChart2(){
+  var ctx = document.getElementById('myChart5');
+  const max = Math.max.apply(null, Object.values(defaultData));
+  var buffer = 10;
+  var maxValuePlusBuffer = buffer + max;
+
+  var myChart5 = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: labels2,
+          datasets: [{
+              label: '{{result.0.1}}',
+              data: defaultData2,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+            }]
+     },
+     options: {
+         scales: {
+             yAxes: [{
+               ticks: {
+                 beginAtZero: true,
+                 max: maxValuePlusBuffer
+             }
+           }]
+         }
+     }
+  });
+  }
+{% endblock jquery %}
+</script>
 
 <div class="row">
   <div class="col-md-12">
@@ -68,5 +183,21 @@
 
 </div>
 
+
+    <div class="row">
+      <div class="col-md-12 m-5">
+      </div>
+      <div class="col-md-12 p-5">
+        <canvas id="myChart2" width="200" height="100"></canvas>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 m-5">
+      </div>
+      <div class="col-md-12 p-5">
+        <canvas id="myChart5" width="200" height="100"></canvas>
+      </div>
+    </div>
 
 {% endblock content %}

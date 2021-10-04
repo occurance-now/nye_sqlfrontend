@@ -18,7 +18,7 @@ class Temperatures(models.Model):
     id = models.AutoField(primary_key=True)
     TemperatureName = models.CharField(max_length=500)
     TemperatureNumericID = models.IntegerField()
-    TemperatureValue = models.CharField(max_length=500)
+    TemperatureValue = models.IntegerField()
     TemperatureTimeStamp = models.DateTimeField()
     TemperatureQuality = models.IntegerField()
 
@@ -32,7 +32,7 @@ class Pressure(models.Model):
     id = models.AutoField(primary_key=True)
     PressureName = models.CharField(max_length=500)
     PressureNumericID = models.IntegerField()
-    PressureValue = models.CharField(max_length=500)
+    PressureValue = models.IntegerField()
     PressureTimeStamp = models.DateTimeField()
     PressureQuality = models.IntegerField()
 

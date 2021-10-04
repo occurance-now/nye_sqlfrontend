@@ -14,7 +14,7 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DeleteView,
-    View
+    View,
 
 )
 
@@ -25,16 +25,19 @@ from django.contrib.auth import get_user_model
 from datetime import datetime, timedelta
 
 User = get_user_model()
+
 '''
 Data Views
 '''
-class ChartDataHome(APIView):
+class ChartDataHome(LoginRequiredMixin, APIView):
     authentication_classes = []
     permission_classes = []
 
     def get(self, request, format=None):
         tempId_count = Temperatures.objects.values_list('TemperatureName').distinct().count()
         pressId_count = Pressure.objects.values_list('PressureName').distinct().count()
+        ## ADD PUMP data
+        ## ADD LEVEL data
         default_items = [tempId_count, pressId_count, 14, 5]
         labels = ['Temperature', 'Pressure', 'Motors', 'Level']
         data = {
@@ -43,50 +46,136 @@ class ChartDataHome(APIView):
         }
         return Response(data)
 
-class ChartDataTemperatureHome(APIView):
-    authentication_classes = []
-    permission_classes = []
+@login_required
+def chartDataTempId(request, my_key, *args, **kwargs):
 
-    def get(self, request, format=None):
-        cursor = connection.cursor()
-        #cursor.execute(procedure)
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM [DJANGO_MSSQL].[dbo].[mssqlFrontEnd_temperatures] WHERE TemperatureName = %s ORDER BY TemperatureTimeStamp DESC;",[my_key])
+    result = cursor.fetchall()
 
-        cursor.execute("SELECT * FROM [DJANGO_MSSQL].[dbo].[mssqlFrontEnd_temperatures] WHERE TemperatureTimeStamp >= DATEADD(day, -3, GETDATE())")
-        tempId_count = Temperatures.objects.values_list('TemperatureName').distinct()
-        print(tempId_count)
-        result = cursor.fetchall()
-        default_items = [10,20 , 14, 5]
-        labels = ['Temperature', 'Pressure', 'Motors',]
+    cursor = connection.cursor()
+    cursor.execute("SELECT AVG(TemperatureValue), MIN(TemperatureValue), MAX(TemperatureValue) FROM [DJANGO_MSSQL].[dbo].[mssqlFrontEnd_temperatures]  WHERE TemperatureName = %s;",[my_key])
+    dataRange = cursor.fetchall()
+    dataRangeX = ['Minimum', 'Average', 'Maximum']
+    rangeValues = []
+    for i in dataRange:
+        for x in i:
+            rangeValues.append(x)
 
-        temp_values = []
-        date_values = []
-        for list in result:
-            temp_values.append(list[3])
-        for list in result:
-            date_values.append(list[4])
-        data = {
-            'x': date_values,
-            'y': temp_values,
-        }
+    temp_values = []
+    date_values = []
+    for list in result:
+        temp_values.append(list[3])
+    for list in result:
+        date_values.append(list[4])
 
-        return Response(data)
+    data = {
+        'x': date_values,
+        'y': temp_values,
+        'x2': dataRangeX,
+        'y2': rangeValues,
+    }
+
+    return JsonResponse(data)
+
+@login_required
+def chartDataTempIdRange(request, my_key, q1, q2, *args, **kwargs):
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM [DJANGO_MSSQL].[dbo].[mssqlFrontEnd_temperatures] \
+     WHERE TemperatureName = %s AND TemperatureTimeStamp > %s AND TemperatureTimeStamp < %s ORDER BY TemperatureTimeStamp ASC;",[my_key, q1, q2])
+    result = cursor.fetchall()
+
+    cursor = connection.cursor()
+    cursor.execute("SELECT AVG(TemperatureValue), MIN(TemperatureValue), MAX(TemperatureValue) FROM [DJANGO_MSSQL].[dbo].[mssqlFrontEnd_temperatures]  WHERE TemperatureName = %s AND TemperatureTimeStamp > %s AND TemperatureTimeStamp < %s",[my_key, q1, q2])
+    dataRange = cursor.fetchall()
+    dataRangeX = ['Minimum', 'Average', 'Maximum']
+    rangeValues = []
 
 
+    for i in dataRange:
+        for x in i:
+            rangeValues.append(x)
+    temp_values = []
+    date_values = []
+    for list in result:
+        temp_values.append(list[3])
+    for list in result:
+        date_values.append(list[4])
 
+    data = {
+        'x': date_values,
+        'y': temp_values,
+        'x2': dataRangeX,
+        'y2': rangeValues,
+    }
 
-
-
-
-def get_data(request, *args, **kwargs):
-    if request.is_ajax and request.method == "GET":
-        data = {
-            'sales': 100,
-            'customers': 10
-        }
     return JsonResponse(data)
 
 
+@login_required
+def chartDataPressId(request, my_key, *args, **kwargs):
 
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM [DJANGO_MSSQL].[dbo].[mssqlFrontEnd_pressure] WHERE PressureName = %s ORDER BY PressureTimeStamp ASC;",[my_key])
+    result = cursor.fetchall()
+
+    cursor = connection.cursor()
+    cursor.execute("SELECT AVG(PressureValue), MIN(PressureValue), MAX(PressureValue) FROM [DJANGO_MSSQL].[dbo].[mssqlFrontEnd_pressure]  WHERE PressureName = %s;",[my_key])
+    dataRange = cursor.fetchall()
+    dataRangeX = ['Minimum', 'Average', 'Maximum']
+    rangeValues = []
+
+    for i in dataRange:
+        for x in i:
+            rangeValues.append(x)
+
+    temp_values = []
+    date_values = []
+    for list in result:
+        temp_values.append(list[3])
+    for list in result:
+        date_values.append(list[4])
+    data = {
+        'x': date_values,
+        'y': temp_values,
+        'x2': dataRangeX,
+        'y2': rangeValues,
+    }
+
+    return JsonResponse(data)
+
+
+@login_required
+def chartDataPressIdRange(request, my_key, q1, q2, *args, **kwargs):
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM [DJANGO_MSSQL].[dbo].[mssqlFrontEnd_pressure] \
+     WHERE PressureName = %s AND PressureTimeStamp > %s AND PressureTimeStamp < %s ORDER BY PressureTimeStamp DESC;",[my_key, q1, q2])
+    result = cursor.fetchall()
+
+    cursor = connection.cursor()
+    cursor.execute("SELECT AVG(PressureValue), MIN(PressureValue), MAX(PressureValue) FROM [DJANGO_MSSQL].[dbo].[mssqlFrontEnd_pressure]  WHERE PressureName = %s AND PressureTimeStamp > %s AND PressureTimeStamp < %s",[my_key, q1, q2])
+    dataRange = cursor.fetchall()
+    dataRangeX = ['Minimum', 'Average', 'Maximum']
+    rangeValues = []
+    for i in dataRange:
+        for x in i:
+            rangeValues.append(x)
+
+    temp_values = []
+    date_values = []
+    for list in result:
+        temp_values.append(list[3])
+    for list in result:
+        date_values.append(list[4])
+
+    data = {
+        'x': date_values,
+        'y': temp_values,
+        'x2': dataRangeX,
+        'y2': rangeValues,
+    }
+
+    return JsonResponse(data)
 
 
 '''
@@ -133,7 +222,8 @@ def searchTemperature(request, my_key):
             paginator = Paginator(result, 10)
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
-            return render(request, 'temperatures/search_results.html', {'result': page_obj})
+
+            return render(request, 'temperatures/search_results.html', {'result': page_obj, 'q1': q1, 'q2': q2})
     return render(request, 'temperatures/tempId.html', {'error': error})
 
 
@@ -202,7 +292,7 @@ def searchPressure(request, my_key):
             paginator = Paginator(result, 10)
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
-            return render(request, 'pressure/search_results_pressure.html', {'result': page_obj})
+            return render(request, 'pressure/search_results_pressure.html', {'result': page_obj, 'q1': q1, 'q2': q2})
     return render(request, 'pressure/pressureId.html', {'error': error})
 
 '''
