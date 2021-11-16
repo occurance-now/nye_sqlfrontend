@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import connection
 from django.core.paginator import Paginator
-from mssqlFrontEnd.models import Departments, Employees, Temperatures, Pressure
-from mssqlFrontEnd.serializers import DepartmentSerializer, EmployeeSerializer
+from mssqlFrontEnd.models import FT01, GA05, GA29, KT09, KT14, KT15, KT19, KT22
+#from mssqlFrontEnd.serializers import DepartmentSerializer, EmployeeSerializer
 from django.views.generic import (
     ListView,
     DetailView,
@@ -29,6 +29,7 @@ User = get_user_model()
 '''
 Data Views
 '''
+
 class ChartDataHome(LoginRequiredMixin, APIView):
     authentication_classes = []
     permission_classes = []
@@ -77,7 +78,7 @@ def chartDataTempId(request, my_key, *args, **kwargs):
     }
 
     return JsonResponse(data)
-
+'''
 @login_required
 def chartDataTempIdRange(request, my_key, q1, q2, *args, **kwargs):
     cursor = connection.cursor()
@@ -176,7 +177,7 @@ def chartDataPressIdRange(request, my_key, q1, q2, *args, **kwargs):
     }
 
     return JsonResponse(data)
-
+'''
 
 '''
 Home View
@@ -185,10 +186,27 @@ class homeView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         return render(request, 'home/home.html', {})
 
+class homeViewBP(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'home/homeBP.html', {})
+
+class homeViewFP(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'home/homeFP.html', {})
+
+class homeViewUniflor(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'home/homeUniflor.html', {})
+
+class homeViewDamping(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'home/homeDamping.html', {})
+
 '''
 Temperature Views
 '''
-class TemperaturesListView(LoginRequiredMixin, ListView):
+'''
+class TemperatureListView(LoginRequiredMixin, ListView):
     model = Temperatures
     template_name = 'data/homeTemp.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'temperatures'
@@ -199,6 +217,20 @@ class TemperaturesListView(LoginRequiredMixin, ListView):
         context = super(TemperaturesListView, self).get_context_data(**kwargs)
         context['temp_name_list'] = Temperatures.objects.order_by('TemperatureName')
         return context
+'''
+@login_required
+def childAssetList(request, my_key):
+    try:
+        cursor = connection.cursor()
+        #cursor.execute(procedure)
+        cursor.execute("SELECT * FROM [US40Kepserver].[dbo].[KT09] WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
+        result = cursor.fetchall()
+        paginator = Paginator(result, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'childAsset/assetId.html', {'result': page_obj, 'db': my_key})
+    finally:
+        cursor.close()
 
 
 @login_required
@@ -223,10 +255,11 @@ def searchTemperature(request, my_key):
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
 
-            return render(request, 'temperatures/search_results.html', {'result': page_obj, 'q1': q1, 'q2': q2})
-    return render(request, 'temperatures/tempId.html', {'error': error})
+            return render(request, 'childAsset/search_results.html', {'result': page_obj, 'q1': q1, 'q2': q2})
+    return render(request, 'childAsset/assetId.html', {'error': error})
 
 
+'''
 @login_required
 def stored_procTemperature(request, my_key):
     try:
@@ -241,10 +274,10 @@ def stored_procTemperature(request, my_key):
     finally:
         cursor.close()
 
-
+'''
 '''
 Pressure
-'''
+
 
 class PressureListView(LoginRequiredMixin, ListView):
     model = Pressure
@@ -294,9 +327,17 @@ def searchPressure(request, my_key):
             page_obj = paginator.get_page(page_number)
             return render(request, 'pressure/search_results_pressure.html', {'result': page_obj, 'q1': q1, 'q2': q2})
     return render(request, 'pressure/pressureId.html', {'error': error})
+'''
+
+
+
+
+
+
 
 '''
 CRUD responses
+'''
 '''
 # Create your views here.
 @csrf_exempt
@@ -328,3 +369,4 @@ def departmentAPI(request, id=0):
         department=Departments.objects.get(DepertmentId=id)
         department.delete()
         return JsonResponse("Deleted Successfully", safe=False)
+'''
