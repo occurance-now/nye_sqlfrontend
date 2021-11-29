@@ -8,126 +8,101 @@
 
 
 {% block content %}
+<div class="container-fluid bg-3 text-center">
+  <h1 class="margin text-center">Nye Lubricants Middle Production Assets</h1>
+</div>
 
 
-<script>
-{% block jquery %}
-var endpoint ='/api/chart/data/home/'
-var defaultData = []
-var labels = []
-var maxDataValue
-$.ajax({
-  method: "GET",
-  url: endpoint,
-  success: function(data){
-    labels = data.labels
-    defaultData = data.default_items
-    setChart()
-    },
-    error: function(error_data){
-      console.log("error")
-      console.log("error_data")
-    }
-})
-
-function setChart(){
-  var ctx = document.getElementById('myChart');
-  const max = Math.max.apply(null, Object.values(defaultData));
-  var buffer = 10;
-  var maxValuePlusBuffer = buffer + max;
-
-  var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: labels,
-          datasets: [{
-              label: 'Number of Transmitters Being Watched',
-              data: defaultData,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-            }]
-     },
-     options: {
-         scales: {
-             yAxes: [{
-               ticks: {
-                 beginAtZero: true,
-                 max: maxValuePlusBuffer
-             }
-           }]
-         }
-     }
-  });
-}
-{% endblock jquery %}
-</script>
-
-
-<div class="container-fluid bg-3 text-center mt-4">
-  <h3 class="margin">Nye Lubricants Middle Production Assets</h3><br>
+<div class="container-fluid bg-3 text-center mt-5 p-4 border border-info">
+  <h3 class="margin m-3">Kettles</h3>
   <div class="row mt-5">
     <div class="col-sm-3">
       <div class="card">
         <div class="card-body">
-            <h4>Temperature</h4>
+            <h4>KT-09</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a role="button" class="btn btn-outline-info btn-lg" href="{% url 'child-AssetList' 'KT09' %}">KT09</a>
+            <a role="button" class="btn btn-outline-info btn-lg" href="{% url 'parent-AssetList' 'KT09' %}">KT09 Data</a>
         </div>
       </div>
     </div>
     <div class="col-sm-3">
       <div class="card">
         <div class="card-body">
-          <h4>Pressure</h4>
+          <h4>KT-14</h4>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a role="button" class="btn btn-outline-info btn-lg">KT14</a>
+          <a role="button" class="btn btn-outline-info btn-lg" href="{% url 'parent-AssetList' 'KT14' %}">KT14 Data</a>
         </div>
       </div>
     </div>
-
     <div class="col-sm-3">
     <div class="card">
       <div class="card-body">
-        <h4>Motors</h4>
+        <h4>KT-15</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a role="button" class="btn btn-outline-info btn-lg">KT15</a>
+          <a role="button" class="btn btn-outline-info btn-lg"  href="{% url 'parent-AssetList' 'KT15' %}">KT15 Data</a>
         </div>
       </div>
     </div>
-
-
     <div class="col-sm-3">
       <div class="card">
         <div class="card-body">
-          <h4>Level</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a role="button" class="btn btn-outline-info btn-lg">KT19</a>
+            <h4>KT-19</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a role="button" class="btn btn-outline-info btn-lg" href="{% url 'parent-AssetList' 'KT19' %}">KT19 Data</a>
         </div>
       </div>
     </div>
-
+</div>
+  <div class="row mt-5">
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+            <h4>KT-22</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a role="button" class="btn btn-outline-info btn-lg" href="{% url 'parent-AssetList' 'KT22' %}">KT22 Data</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="row">
-  <div class="col-md-12 m-5">
+<div class="container-fluid bg-3 mt-5 p-4 text-center mt-4 border border-info">
+  <h3 class="margin m-3">Gaulins</h3>
+  <div class="row mt-5">
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+            <h4>GA-05</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a role="button" class="btn btn-outline-info btn-lg" href="{% url 'parent-AssetList' 'GA05' %}">GA05 Data</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+            <h4>GA29</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a role="button" class="btn btn-outline-info btn-lg" href="{% url 'parent-AssetList' 'GA29' %}">GA29 Data</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-md-12">
-    <canvas id="myChart" width="400" height="200"></canvas>
+</div>
+
+<div class="container-fluid bg-3 mt-5 p-4 text-center border border-info">
+  <h3 class="margin m-3">Flow Transmitters</h3>
+  <div class="row mt-5">
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+            <h4>FT-01</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a role="button" class="btn btn-outline-info btn-lg" href="{% url 'parent-AssetList' 'FT01' %}">FT01 Data</a>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>
 {% endblock content %}

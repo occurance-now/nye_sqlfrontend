@@ -2,55 +2,31 @@ from django.conf.urls import url
 from mssqlFrontEnd import views
 from django.urls import path, include
 from .views import (
-    #TemperaturesListView,
-    #PressureListView,
     homeView,
+    parentAssetListMP,
+    childAssetDataMP,
+    dateRangeParentMP,
+    searchChildAssetMP,
+    dateRangeParentChildMP,
+    chartDateRange,
     homeViewBP,
     homeViewFP,
     homeViewUniflor,
     homeViewDamping,
-    childAssetList,
-    ChartDataHome,
-    chartDataTempId,
-    #chartDataTempIdRange,
-    #chartDataPressId,
-    #chartDataPressIdRange,
 
 )
 
 urlpatterns=[
-    #url(r'^department$', views.departmentAPI),
-    #url(r'^department/([0-9]+)$',views.departmentAPI),
     url(r'^home/$', homeView.as_view(), name='home-details'),
     url(r'^homeBP/$', homeViewBP.as_view(), name='home-detailsBP'),
     url(r'^homeFP/$', homeViewFP.as_view(), name='home-detailsFP'),
     url(r'^homeUniflor/$', homeViewUniflor.as_view(), name='home-detailsUniflor'),
     url(r'^homeDamping/$', homeViewDamping.as_view(), name='home-detailsDamping'),
-
-    url(r'^api/chart/data/home/$', ChartDataHome.as_view()),
-    path('chart/data/home/temp/<str:my_key>', views.chartDataTempId, name='chart-tempId'),
-
-    path('childAssetList/<str:my_key>', views.childAssetList, name='child-AssetList'),
-    path('dateRangeTemperature/<str:my_key>', views.searchTemperature, name='date-temp'),
-
-    #path('homeTemp/', TemperaturesListView.as_view(), name='data-homeTemp'),
-
-    #path('homeTemp/', TemperaturesListView.as_view(), name='data-homeTemp'),
-
-
+    path('parentAssetListMP/<str:table_name>', views.parentAssetListMP, name='parent-AssetList'),#Parent asset with list of child assets over last day
+    path('dateRangeParentMP/<str:table_name>', views.dateRangeParentMP, name='data-RangeParent'),#Search for parent asset data over date range
+    path('childAssetDataMP/<str:table_name>/<str:tag_name>', views.childAssetDataMP, name='childAsset-data'),#Child asset data from today
+    path('chart/data/home/press/range/<str:table_name>/<str:tag_name>/<str:q1>/<str:q2>', views.chartDateRange, name='chart-DateRange'),
+    path('dateRangeParentChildMP/<str:table_name>/<str:tag_name>/<str:q1>/<str:q2>', views.dateRangeParentChildMP, name='dateRangeParentChild-data'),#date range of child from parent asset
+    path('dateRangeChild/<str:table_name>/<str:tag_name>', views.searchChildAssetMP, name='data-RangeChild'),
 
 ]
-
-'''
-path('chart/data/home/temp/range/<str:my_key>/<str:q1>/<str:q2>', views.chartDataTempIdRange, name='chart-tempIdRange'),
-
-path('chart/data/home/press/<str:my_key>', views.chartDataPressId, name='chart-pressId'),
-path('chart/data/home/press/range/<str:my_key>/<str:q1>/<str:q2>', views.chartDataPressIdRange, name='chart-pressIdRange'),
-
-path('homeTemp/', TemperaturesListView.as_view(), name='data-homeTemp'),
-path('stored_procTemperature/<str:my_key>', views.stored_procTemperature, name='temperature-detail'),
-path('homePress/', PressureListView.as_view(), name='data-homePress'),
-
-path('stored_procPressure/<str:my_key>', views.stored_procPressure, name='pressure-detail'),
-path('dateRangePressure/<str:my_key>', views.searchPressure, name='date-press'),
-'''

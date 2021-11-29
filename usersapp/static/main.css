@@ -1,6 +1,5 @@
 body {
-  background: #fafafa;
-  color: #333333;
+  background-color: #141414;
   margin-top: 5rem;
 }
 
@@ -12,14 +11,17 @@ ul {
   margin: 0;
 }
 
-
-
+.navbar{
+  box-shadow: 0px 8px 8px -6px rgba(1.6, 47.1, 88.2,.8);
+}
 .bg-steel {
-  background-color: #5f788a;
+  background-color: rgba(56,56,56,0.9); /* Black background with opacity */
+
 }
 
 .site-header .navbar-nav .nav-link {
   color: #cbd5db;
+
 }
 
 .site-header .navbar-nav .nav-link:hover {
@@ -31,7 +33,7 @@ ul {
 }
 
 .content-section {
-  background: #ffffff;
+  background: #121212;
   padding: 10px 20px;
   border: 1px solid #dddddd;
   border-radius: 3px;
