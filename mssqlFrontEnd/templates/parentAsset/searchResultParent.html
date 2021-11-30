@@ -22,7 +22,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style="background-color: white;">
       <thead>
         <tr>
           <th scope="col">#
@@ -39,7 +39,7 @@
         {% for result in result %}
       <tr>
         <td scope="row"><small class="text-muted">{{ result.0 }}</small></td>
-        <td><a href="{% url 'dateRangeParentChild-data' db result.1 q1 q2 %}">{{ result.1 }}</a></td>
+        <td><a href="{% url 'dateRangeParentChild-data' db result.1 q1 q2 %}" style="color: black;">{{ result.1 }}</a></td>
         <td>{{ result.3 }}</td>
         <td>{{ result.4 }}</td>
       </tr>
@@ -69,15 +69,15 @@
     </div>
   </div>
    <div class="col-md-4">
-       <div class="content-section">
+       <div class="content-sectionDirectory">
          <h3>Directory</h3>
          <p>Tags Associated with {{db}}</p>
          <p class='text-muted'>
-           <ul class="list-group">
+           <ul class="list-group list-group-flush">
              {% for i in result %}
              {% ifchanged i.1 %}
-             <li class="list-group-item list-group-item-light">
-               <a href="{% url 'dateRangeParentChild-data' db i.1 q1 q2 %}">{{i.1}}</a>
+             <li class="list-group-item list-group-item-dark" style="background-color: rgba(100,100,100,0.1)">
+               <a href="{% url 'dateRangeParentChild-data' db i.1 q1 q2 %}"  style="color:#cbd5db;">{{i.1}}</a>
              </li>
              {% else %}
              {% endifchanged %}

@@ -52,12 +52,33 @@ function setChart(){
             }]
      },
      options: {
+          title: {
+            display: true,
+            text: '{{result.0.1}}',
+            fontColor: 'white',
+
+          },
+
          scales: {
+            xAxes: [{
+              display: true,
+              gridLines: {
+                color: '#A0A0A0',
+              },
+              ticks: {
+                fontColor: 'white',
+            },
+            }],
              yAxes: [{
+              display: true,
+              gridLines: {
+                color: '#A0A0A0',
+              },
                ticks: {
                  beginAtZero: true,
-                 max: maxValuePlusBuffer
-             }
+                 max: maxValuePlusBuffer,
+                 fontColor: 'white',
+             },
            }]
          }
      }
@@ -97,12 +118,36 @@ function setChart2(){
             }]
      },
      options: {
+          title: {
+            display: true,
+            text: '{{result.0.1}}',
+            fontColor: 'white',
+
+          },
+          legend: {
+            display: false
+          },
+
          scales: {
+            xAxes: [{
+              display: true,
+              gridLines: {
+                color: '#A0A0A0',
+              },
+              ticks: {
+                fontColor: 'white',
+            },
+            }],
              yAxes: [{
+              display: true,
+              gridLines: {
+                color: '#A0A0A0',
+              },
                ticks: {
                  beginAtZero: true,
-                 max: maxValuePlusBuffer
-             }
+                 max: maxValuePlusBuffer,
+                 fontColor: 'white',
+             },
            }]
          }
      }
@@ -124,7 +169,7 @@ function setChart2(){
 </div>
 <div class="row">
   <div class="col-md-12">
-    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style="background-color: white;">
       <thead>
         <tr>
           <th scope="col">#
@@ -180,7 +225,7 @@ function setChart2(){
       <div class="col-md-12 m-5">
       </div>
       <div class="col-md-12 p-5">
-        <canvas id="myChart2" width="200" height="100"></canvas>
+        <canvas id="myChart2" width="200" height="100" style="background-color: rgba(80,80,80,0.5); padding: 10px;"></canvas>
       </div>
     </div>
 
@@ -188,7 +233,7 @@ function setChart2(){
       <div class="col-md-12 m-5">
       </div>
       <div class="col-md-12 p-5">
-        <canvas id="myChart5" width="200" height="100"></canvas>
+        <canvas id="myChart5" width="200" height="100" style="background-color: rgba(80,80,80,0.5); padding: 10px;"></canvas>
       </div>
     </div>
 

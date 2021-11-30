@@ -45,18 +45,39 @@
             datasets: [{
                 label: '{{result.0.1}}',
                 data: defaultData,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
               }]
        },
        options: {
+            title: {
+              display: true,
+              text: '{{result.0.1}}',
+              fontColor: 'white',
+
+            },
+
            scales: {
+              xAxes: [{
+                display: true,
+                gridLines: {
+                  color: '#A0A0A0',
+                },
+                ticks: {
+                  fontColor: 'white',
+              },
+              }],
                yAxes: [{
+                display: true,
+                gridLines: {
+                  color: '#A0A0A0',
+                },
                  ticks: {
                    beginAtZero: true,
-                   max: maxValuePlusBuffer
-               }
+                   max: maxValuePlusBuffer,
+                   fontColor: 'white',
+               },
              }]
            }
        }
@@ -96,19 +117,43 @@
               }]
        },
        options: {
+            title: {
+              display: true,
+              text: '{{result.0.1}}',
+              fontColor: 'white',
+
+            },
+            legend: {
+              display: false
+            },
+
            scales: {
+              xAxes: [{
+                display: true,
+                gridLines: {
+                  color: '#A0A0A0',
+                },
+                ticks: {
+                  fontColor: 'white',
+              },
+              }],
                yAxes: [{
+                display: true,
+                gridLines: {
+                  color: '#A0A0A0',
+                },
                  ticks: {
                    beginAtZero: true,
-                   max: maxValuePlusBuffer
-               }
+                   max: maxValuePlusBuffer,
+                   fontColor: 'white',
+               },
              }]
            }
        }
     });
     }
   {% endblock jquery %}
-  
+
 </script>
   <div class="row">
     <div class="col-md-12">
@@ -124,7 +169,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+      <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style="background-color: white;">
         <thead>
           <tr>
             <th scope="col">#
@@ -172,12 +217,13 @@
        {% endif %}
        </div>
        <div class="row">
+         <div class="content-section2">
          <div class="col-md-12 m-2">
            <form name="form" action="{% url 'data-RangeChild' db result.0.1 %}" method="GET">
              <table style="width:30%">
                <tr>
                  <td><input type="text"  class="datepicker" name="q1"> </td>
-                 <td style="width:5%"> Between </td>
+                 <td style="padding: 10px; color: #cbd5db;"> Between </td>
                  <td><input type="text"  class="datepicker" name="q2"></td>
                  <br>
                  <td><input type="submit" value="Search"></td>
@@ -186,12 +232,13 @@
            </form>
          </div>
          <div class="col-md-12 m-2">
-           <table style="width:30%">
+           <table style="width:40%; color: #cbd5db;">
              <tr>
                <td>Year-Month-Date <br>Example: 2021-10-01</td>
              </tr>
            </table>
          </div>
+       </div>
        </div>
   </div>
 
@@ -199,8 +246,9 @@
       <div class="row">
         <div class="col-md-12 m-5">
         </div>
+
         <div class="col-md-12 p-5">
-          <canvas id="myChart2" width="200" height="100"></canvas>
+          <canvas id="myChart2" width="200" height="100" style="background-color: rgba(80,80,80,0.5); padding: 10px;"></canvas>
         </div>
       </div>
 
@@ -208,7 +256,7 @@
         <div class="col-md-12 m-5">
         </div>
         <div class="col-md-12 p-5">
-          <canvas id="myChart5" width="200" height="100"></canvas>
+          <canvas id="myChart5" width="200" height="100" style="background-color: rgba(80,80,80,0.5); padding: 10px;"></canvas>
         </div>
       </div>
 

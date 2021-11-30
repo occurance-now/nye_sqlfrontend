@@ -1,6 +1,7 @@
 body {
-  background-color: #141414;
+  background-color: #121212;
   margin-top: 5rem;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -9,18 +10,25 @@ h1, h2, h3, h4, h5, h6 {
 
 ul {
   margin: 0;
-}
 
+}
+.margin h3 {
+  font-size: 50px;
+}
 .navbar{
-  box-shadow: 0px 8px 8px -6px rgba(1.6, 47.1, 88.2,.8);
+  box-shadow: 0px 8px 8px -11px rgba(255,255,255,.9);
+  z-index: 10;
+  color: #ffffff;
 }
-.bg-steel {
-  background-color: rgba(56,56,56,0.9); /* Black background with opacity */
 
+.bg-steel {
+  background-color: rgba(40,40,40,0.9); /* Black background with opacity */
 }
+
 
 .site-header .navbar-nav .nav-link {
   color: #cbd5db;
+  font-family: Poppins;
 
 }
 
@@ -33,19 +41,34 @@ ul {
 }
 
 .content-section {
-  background: #121212;
+  background-color: rgba(80,80,80,0.5);
+  box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);
   padding: 10px 20px;
-  border: 1px solid #dddddd;
   border-radius: 3px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
+.content-section h3 {
+  color: #ffffff;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+
+
+.content-section p {
+  color: #cbd5db;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+
 .article-title {
-  color: #444444;
+  color: #ffffff;
 }
 
 a.article-title:hover {
-  color: #428bca;
+  color: #cbd5db;
   text-decoration: none;
 }
 
@@ -92,6 +115,54 @@ a.article-title:hover {
     margin-top: 0; // remove the gap so it doesn't close
  }
 
+
  .nav-item:hover {
-   background-color: #f5f5f5;
+     background-color:  rgba(98, 0, 238, .8);
+     border-radius: 2px;
  }
+
+
+.content-section2 {
+   background-color: rgba(80,80,80,0.5);
+   box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);
+   border-radius: 3px;
+   margin-bottom: 3%;
+}
+
+.content-section2 h4 {
+  color: #ffffff;
+
+}
+
+.content-section2 p {
+  color: #cbd5db;
+  font-size: 1.1em;
+
+}
+
+.content-sectionDirectory {
+  background-color: rgba(80,80,80,0.5);
+  box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);
+  border-radius: 3px;
+  margin-bottom: 3%;
+}
+
+
+.content-sectionDirectory h3 {
+  color: #ffffff;
+  padding: 15px 0px 5px 15px;
+
+}
+
+.content-sectionDirectory p {
+  color: #cbd5db;
+  font-size: 1.1em;
+  padding: 0px 0px 5px 15px;
+}
+
+.content-section3 {
+  background-color: rgba(80,80,80,0.5);
+  box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);
+  border-radius: 3px;
+  margin-bottom: 3%;
+}

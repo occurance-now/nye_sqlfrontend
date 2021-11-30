@@ -10,124 +10,107 @@
 {% block content %}
 
 
-<script>
-{% block jquery %}
-var endpoint ='/api/chart/data/home/'
-var defaultData = []
-var labels = []
-var maxDataValue
-$.ajax({
-  method: "GET",
-  url: endpoint,
-  success: function(data){
-    labels = data.labels
-    defaultData = data.default_items
-    setChart()
-    },
-    error: function(error_data){
-      console.log("error")
-      console.log("error_data")
-    }
-})
 
-function setChart(){
-  var ctx = document.getElementById('myChart');
-  const max = Math.max.apply(null, Object.values(defaultData));
-  var buffer = 10;
-  var maxValuePlusBuffer = buffer + max;
-
-  var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: labels,
-          datasets: [{
-              label: 'Number of Transmitters Being Watched',
-              data: defaultData,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-            }]
-     },
-     options: {
-         scales: {
-             yAxes: [{
-               ticks: {
-                 beginAtZero: true,
-                 max: maxValuePlusBuffer
-             }
-           }]
-         }
-     }
-  });
-}
-{% endblock jquery %}
-</script>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-section">
+        <h3>Nye Lubricants Front Production Assets</h3>
+        <p>This page is displaying todays data for Parent Assets child assets are listed in the directory on the right hand side of the screen.
+        please use the search bar below with the correct date formart to search for all available data on the requested date.</p>
+      </div>
+    </div>
+  </div>
 
 
-<div class="container-fluid bg-3 text-center mt-4">
-  <h3 class="margin">Nye Lubricants Front Production Assets</h3><br>
-  <div class="row mt-5">
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-            <h4>Temperature</h4>
+  <div class="container-fluid bg-3 text-center mt-3 p-4" style="background-color: rgba(40,40,40,0.4); box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);">
+    <h3 class="margin m-3" style="color: #ffffff; font-size: 2.5em;">Kettles</h3>
+    <div class="row mt-5">
+      <div class="col-sm-3 ">
+        <div class="content-section2">
+          <div class="card-body">
+              <h4>Lorem Ipsum</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <a role="button" class="btn btn-outline-info btn-lg" href="">Lorem Ipsum</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="content-section2">
+          <div class="card-body">
+            <h4>Lorem Ipsum</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a role="button" class="btn btn-outline-info btn-lg">KT19</a>
+            <a role="button" class="btn btn-outline-info btn-lg" href="">Lorem Ipsum</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
+      <div class="col-sm-3">
+      <div class="content-section2">
         <div class="card-body">
-          <h4>Pressure</h4>
+          <h4>Lorem Ipsum</h4>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a role="button" class="btn btn-outline-info btn-lg">Lorem Ipsum</a>
+            <a role="button" class="btn btn-outline-info btn-lg"  href="">Lorem Ipsum</a>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="col-sm-3">
-    <div class="card">
-      <div class="card-body">
-        <h4>Motors</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a role="button" class="btn btn-outline-info btn-lg">Lorem Ipsum</a>
+      <div class="col-sm-3">
+        <div class="content-section2">
+          <div class="card-body">
+              <h4>Lorem Ipsum</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <a role="button" class="btn btn-outline-info btn-lg" href="">Lorem Ipsum</a>
+          </div>
         </div>
       </div>
-    </div>
-
-
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h4>Level</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a role="button" class="btn btn-outline-info btn-lg">Lorem Ipsum</a>
-        </div>
-      </div>
-    </div>
-
-</div>
-
-<div class="row">
-  <div class="col-md-12 m-5">
   </div>
-  <div class="col-md-12">
-    <canvas id="myChart" width="400" height="200"></canvas>
+    <div class="row mt-5">
+      <div class="col-sm-3">
+        <div class="content-section2">
+          <div class="card-body">
+              <h4>Lorem Ipsum</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <a role="button" class="btn btn-outline-info btn-lg" href="">Lorem Ipsum</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+
+  <div class="container-fluid bg-3 mt-3 p-4 text-center" style="background-color: rgba(40,40,40,0.4); box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);">
+    <h3 class="margin m-3" style="color: #ffffff; font-size: 2.5em;">Gaulins</h3>
+    <div class="row mt-5">
+      <div class="col-sm-3">
+        <div class="content-section2">
+          <div class="card-body">
+            <h4>Lorem Ipsum</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <a role="button" class="btn btn-outline-info btn-lg" href="">Lorem Ipsum</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="content-section2">
+          <div class="card-body">
+              <h4>Lorem Ipsum</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <a role="button" class="btn btn-outline-info btn-lg" href="">Lorem Ipsum</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid bg-3 mt-3 p-4 text-center" style="background-color: rgba(40,40,40,0.4); box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);">
+    <h3 class="margin m-3" style="color: #ffffff; font-size: 2.5em;">Flow Transmitters</h3>
+    <div class="row mt-5">
+      <div class="col-sm-3">
+        <div class="content-section2">
+          <div class="card-body">
+            <h4>Lorem Ipsum</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <a role="button" class="btn btn-outline-info btn-lg" href="">Lorem Ipsum</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock content %}
