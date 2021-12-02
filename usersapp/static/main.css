@@ -42,7 +42,7 @@ ul {
 
 .content-section {
   background-color: rgba(80,80,80,0.5);
-  box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);
+  box-shadow: 0px 8px 8px -11px rgba(91, 192, 222, 1);
   padding: 10px 20px;
   border-radius: 3px;
   margin-bottom: 15px;
@@ -117,14 +117,14 @@ a.article-title:hover {
 
 
  .nav-item:hover {
-     background-color:  rgba(98, 0, 238, .8);
+     background-color:  rgba(91, 192, 222, 1);
      border-radius: 2px;
  }
 
 
 .content-section2 {
    background-color: rgba(80,80,80,0.5);
-   box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);
+   box-shadow: 0px 8px 8px -11px 	rgba(91, 192, 222, 1);
    border-radius: 3px;
    margin-bottom: 3%;
 }
@@ -142,7 +142,7 @@ a.article-title:hover {
 
 .content-sectionDirectory {
   background-color: rgba(80,80,80,0.5);
-  box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);
+  box-shadow: 0px 8px 8px -11px rgba(91, 192, 222, 1);
   border-radius: 3px;
   margin-bottom: 3%;
 }
@@ -162,7 +162,7 @@ a.article-title:hover {
 
 .content-section3 {
   background-color: rgba(80,80,80,0.5);
-  box-shadow: 0px 8px 8px -11px rgba(98, 0, 238, .8);
+  box-shadow: 0px 8px 8px -11px rgba(91, 192, 222, 1);
   border-radius: 3px;
   margin-bottom: 3%;
 }

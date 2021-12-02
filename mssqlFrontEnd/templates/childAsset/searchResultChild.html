@@ -160,7 +160,7 @@ function setChart2(){
     <div class="content-section">
       <h3>Data for: {{result.1.1}}</h3>
       {% if result %}
-      <p>Found {{ result|length }} data point{{ result|pluralize }} between {{q1}} and {{q2}} for child asset {{result.1.1}}.</p>
+      <p>Found {{ total|length }} data point{{ result|pluralize }} between {{q1}} and {{q2}} for child asset {{result.1.1}}.</p>
       {% else %}
       <p>No products matched your search criteria.</p>
       {% endif %}
@@ -186,41 +186,31 @@ function setChart2(){
         {% for result in result %}
       <tr>
         <td scope="row"><small class="text-muted">{{ result.0 }}</small></td>
-        <td><a>{{ result.1 }}</a></td>
+        <td><a style="color: #5bc0de;">{{ result.1 }}</a></td>
         <td>{{ result.3 }}</td>
         <td>{{ result.4 }}</td>
       </tr>
       {% endfor %}
-
       </tbody>
-
     </table>
-
-    {% if is_paginated %}
-
-     {% if page_obj.has_previous %}
-       <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-       <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-     {% endif %}
-
-     {% for num in page_obj.paginator.page_range %}
-       {% if page_obj.number == num %}
-         <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-       {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-         <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-       {% endif %}
-     {% endfor %}
-
-     {% if page_obj.has_next %}
-       <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-       <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-     {% endif %}
-
-   {% endif %}
-
-</div>
-
-
+    <div class="pagination">
+        {% if result.has_previous %}
+             <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+             <a class="btn btn-outline-info mb-4" href="?page={{ result.q1.q2.previous_page_number }}">Previous</a>
+           {% endif %}
+           {% for num in result.paginator.page_range %}
+             {% if result.number == num %}
+               <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+             {% elif num > result.number|add:'-3' and num < result.number|add:'3' %}
+               <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+             {% endif %}
+           {% endfor %}
+           {% if result.has_next %}
+             <a class="btn btn-outline-info mb-4" href="?page={{ result..q1.q2.next_page_number }}">Next</a>
+             <a class="btn btn-outline-info mb-4" href="?page={{ result..q1.q2.paginator.num_pages }}">Last</a>
+           {% endif %}
+          </div>
+      </div>
     <div class="row">
       <div class="col-md-12 m-5">
       </div>
@@ -236,5 +226,6 @@ function setChart2(){
         <canvas id="myChart5" width="200" height="100" style="background-color: rgba(80,80,80,0.5); padding: 10px;"></canvas>
       </div>
     </div>
+
 
 {% endblock content %}

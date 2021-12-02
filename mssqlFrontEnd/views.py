@@ -58,28 +58,28 @@ def parentAssetListMP(request, table_name):
     try:
         if table_name == 'KT09':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT09 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
+            cursor.execute("SELECT * FROM KT09 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
         elif table_name == 'KT14':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT14 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
+            cursor.execute("SELECT * FROM KT14 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
         elif table_name == 'KT15':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT15 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
+            cursor.execute("SELECT * FROM KT15 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
         elif table_name == 'KT19':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT19 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
+            cursor.execute("SELECT * FROM KT19 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
         elif table_name == 'KT22':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT22 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
+            cursor.execute("SELECT * FROM KT22 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
         elif table_name == 'GA05':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM GA05 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
+            cursor.execute("SELECT * FROM GA05 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
         elif table_name == 'GA29':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM GA29 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
+            cursor.execute("SELECT * FROM GA29 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
         elif table_name == 'FT01':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM FT01 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
+            cursor.execute("SELECT * FROM FT01 WHERE cast(RecordTime as Date) = cast(getdate() as Date) ORDER BY RecordTime DESC;")
         else:
             print('not a database')
 
@@ -99,28 +99,28 @@ def childAssetDataMP(request, table_name, tag_name):
     try:
         if table_name == 'KT09':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT09 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
+            cursor.execute("SELECT * FROM KT09 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
         elif table_name == 'KT14':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT14 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
+            cursor.execute("SELECT * FROM KT14 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
         elif table_name == 'KT15':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT15 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
+            cursor.execute("SELECT * FROM KT15 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
         elif table_name == 'KT19':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT19 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
+            cursor.execute("SELECT * FROM KT19 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
         elif table_name == 'KT22':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT22 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
+            cursor.execute("SELECT * FROM KT22 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
         elif table_name == 'GA05':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM GA05 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
+            cursor.execute("SELECT * FROM GA05 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
         elif table_name == 'GA29':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM GA29 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
+            cursor.execute("SELECT * FROM GA29 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
         elif table_name == 'FT01':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM FT01 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
+            cursor.execute("SELECT * FROM FT01 WHERE cast(RecordTime as Date) = cast(getdate() as Date) and TagName = %s ORDER BY RecordTime DESC;",[tag_name])
         else:
             print('not a database')
 
@@ -128,25 +128,26 @@ def childAssetDataMP(request, table_name, tag_name):
         paginator = Paginator(result, 10)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-
         today = datetime.datetime.now()
         today_date = date.today()
         today_morning = datetime.datetime.combine(today_date, datetime.datetime.min.time())
         q1 = today_morning.strftime("%Y-%m-%dT%H:%M:%S")
         q2 = today.strftime("%Y-%m-%dT%H:%M:%S")
-
-
-        return render(request, 'childAsset/assetDataMP.html', {'result': page_obj, 'q1': q1, 'q2': q2, 'db': table_name})
+        return render(request, 'childAsset/assetDataMP.html', {'result': page_obj, 'total':result,  'q1': q1, 'q2': q2, 'db': table_name})
     finally:
         cursor.close()
 
 '''
 Search Parent Asset for data in date range
 '''
+q1 = ''
+q2 = ''
 @login_required
-def dateRangeParentMP(request, table_name):
+def dateRangeParentMP(request, table_name, *args, **kwargs):
     error = False
     if 'q1' and 'q2'in request.GET:
+        global q1
+        global q2
         q1 = request.GET['q1']
         q2 = request.GET['q2']
         if not q1:
@@ -156,39 +157,73 @@ def dateRangeParentMP(request, table_name):
         else:
             if table_name == 'KT09':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM KT09 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+                cursor.execute("SELECT  * FROM KT09 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
             elif table_name == 'KT14':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM KT14 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+                cursor.execute("SELECT  * FROM KT14 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
             elif table_name == 'KT15':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM KT15 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+                cursor.execute("SELECT  * FROM KT15 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
             elif table_name == 'KT19':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM KT19 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+                cursor.execute("SELECT  * FROM KT19 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
             elif table_name == 'KT22':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM KT22 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+                cursor.execute("SELECT  * FROM KT22 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
             elif table_name == 'GA05':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM GA05 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+                cursor.execute("SELECT  * FROM GA05 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
             elif table_name == 'GA29':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM GA29 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+                cursor.execute("SELECT  * FROM GA29 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
             elif table_name == 'FT01':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM FT01 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+                cursor.execute("SELECT  * FROM FT01 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
             else:
+                print('not a database')
 
+            result = cursor.fetchall()
+            paginator = Paginator(result, 10)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+            return render(request, 'parentAsset/searchResultParent.html', {'result': page_obj, 'total':result, 'db': table_name, 'q1': q1, 'q2': q2,})
+    else:
+        try:
+            if table_name == 'KT09':
+                cursor = connection.cursor()
+                cursor.execute("SELECT  * FROM KT09 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+            elif table_name == 'KT14':
+                cursor = connection.cursor()
+                cursor.execute("SELECT  * FROM KT14 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+            elif table_name == 'KT15':
+                cursor = connection.cursor()
+                cursor.execute("SELECT  * FROM KT15 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+            elif table_name == 'KT19':
+                cursor = connection.cursor()
+                cursor.execute("SELECT  * FROM KT19 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+            elif table_name == 'KT22':
+                cursor = connection.cursor()
+                cursor.execute("SELECT  * FROM KT22 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+            elif table_name == 'GA05':
+                cursor = connection.cursor()
+                cursor.execute("SELECT  * FROM GA05 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+            elif table_name == 'GA29':
+                cursor = connection.cursor()
+                cursor.execute("SELECT  * FROM GA29 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+            elif table_name == 'FT01':
+                cursor = connection.cursor()
+                cursor.execute("SELECT  * FROM FT01 WHERE RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[q1, q2])
+            else:
                 print('not a database')
             result = cursor.fetchall()
             paginator = Paginator(result, 10)
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
-
-
-            return render(request, 'parentAsset/searchResultParent.html', {'result': page_obj, 'db': table_name, 'q1': q1, 'q2': q2,})
-    return render(request, 'parentAsset/assetId.html', {'error': error})
+            cursor.close()
+            return render(request, 'parentAsset/searchResultParent.html', {'result': page_obj, 'total':result, 'db': table_name, 'q1': q1, 'q2': q2,})
+        except:
+            return render(request, 'error/error.html', {'error': error})
+    return render(request, 'error/error.html', {'error': error})
 
 '''
 Retrieve data for child asset from parent date range
@@ -198,28 +233,28 @@ def dateRangeParentChildMP(request, table_name, tag_name, q1, q2):
     try:
         if table_name == 'KT09':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT09 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            cursor.execute("SELECT  * FROM KT09 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
         elif table_name == 'KT14':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT14 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            cursor.execute("SELECT  * FROM KT14 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
         elif table_name == 'KT15':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT15 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            cursor.execute("SELECT  * FROM KT15 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
         elif table_name == 'KT19':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT19 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            cursor.execute("SELECT  * FROM KT19 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
         elif table_name == 'KT22':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM KT22 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            cursor.execute("SELECT  * FROM KT22 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
         elif table_name == 'GA05':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM GA05 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            cursor.execute("SELECT  * FROM GA05 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
         elif table_name == 'GA29':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM GA29 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            cursor.execute("SELECT  * FROM GA29 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
         elif table_name == 'FT01':
             cursor = connection.cursor()
-            cursor.execute("SELECT TOP (5) * FROM FT01 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            cursor.execute("SELECT  * FROM FT01 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
         else:
             print('not a database')
         result = cursor.fetchall()
@@ -227,7 +262,7 @@ def dateRangeParentChildMP(request, table_name, tag_name, q1, q2):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-        return render(request, 'childAsset/searchResultChild.html', {'result': page_obj, 'q1': q1, 'q2': q2, 'db': table_name})
+        return render(request, 'childAsset/searchResultChild.html', {'result': page_obj, 'total':result, 'q1': q1, 'q2': q2, 'db': table_name})
     finally:
         cursor.close()
 
@@ -237,7 +272,10 @@ Search data range from child asset
 @login_required
 def searchChildAssetMP(request, table_name, tag_name):
     error = False
+
     if 'q1' and 'q2'in request.GET:
+        global q1
+        global q2
         q1 = request.GET['q1']
         q2 = request.GET['q2']
         if not q1:
@@ -247,28 +285,28 @@ def searchChildAssetMP(request, table_name, tag_name):
         else:
             if table_name == 'KT09':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM KT09 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+                cursor.execute("SELECT * FROM KT09 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
             elif table_name == 'KT14':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM KT14 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+                cursor.execute("SELECT * FROM KT14 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
             elif table_name == 'KT15':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM KT15 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+                cursor.execute("SELECT * FROM KT15 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
             elif table_name == 'KT19':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM KT19 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+                cursor.execute("SELECT * FROM KT19 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
             elif table_name == 'KT22':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM KT22 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+                cursor.execute("SELECT * FROM KT22 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
             elif table_name == 'GA05':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM GA05 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+                cursor.execute("SELECT * FROM GA05 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
             elif table_name == 'GA29':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM GA29 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+                cursor.execute("SELECT * FROM GA29 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
             elif table_name == 'FT01':
                 cursor = connection.cursor()
-                cursor.execute("SELECT TOP (5) * FROM FT01 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+                cursor.execute("SELECT * FROM FT01 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
             else:
                 print('not a database')
 
@@ -278,7 +316,42 @@ def searchChildAssetMP(request, table_name, tag_name):
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
 
-            return render(request, 'childAsset/searchResultChild.html', {'result': page_obj, 'db': table_name, 'q1': q1, 'q2': q2})
+            return render(request, 'childAsset/searchResultChild.html', {'result': page_obj, 'total':result, 'db': table_name, 'q1': q1, 'q2': q2})
+    else:
+        try:
+            if table_name == 'KT09':
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM KT09 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            elif table_name == 'KT14':
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM KT14 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            elif table_name == 'KT15':
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM KT15 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            elif table_name == 'KT19':
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM KT19 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            elif table_name == 'KT22':
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM KT22 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            elif table_name == 'GA05':
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM GA05 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            elif table_name == 'GA29':
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM GA29 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            elif table_name == 'FT01':
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM FT01 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s ORDER BY RecordTime DESC;",[tag_name, q1, q2])
+            else:
+                print('not a database')
+            result = cursor.fetchall()
+            paginator = Paginator(result, 10)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+            return render(request, 'childAsset/searchResultChild.html', {'result': page_obj, 'total':result, 'db': table_name, 'q1': q1, 'q2': q2})
+        except:
+            return render(request, 'parentAsset/assetId.html', {'error': error})
     return render(request, 'parentAsset/assetId.html', {'error': error})
 
 
@@ -290,56 +363,56 @@ def chartDateRange(request, table_name, tag_name, q1, q2, *args, **kwargs):
 
     if table_name == 'KT09':
         cursor = connection.cursor()
-        cursor.execute("SELECT TOP (5) * FROM KT09 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
+        cursor.execute("SELECT  * FROM KT09 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
         result = cursor.fetchall()
         cursor = connection.cursor()
         cursor.execute("SELECT MIN(TagValue), AVG(TagValue), MAX(TagValue) FROM KT09  WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s",[tag_name, q1, q2])
         dataRange = cursor.fetchall()
     elif table_name == 'KT14':
         cursor = connection.cursor()
-        cursor.execute("SELECT TOP (5) * FROM KT14 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
+        cursor.execute("SELECT * FROM KT14 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
         result = cursor.fetchall()
         cursor = connection.cursor()
         cursor.execute("SELECT MIN(TagValue), AVG(TagValue), MAX(TagValue) FROM KT14  WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s",[tag_name, q1, q2])
         dataRange = cursor.fetchall()
     elif table_name == 'KT15':
         cursor = connection.cursor()
-        cursor.execute("SELECT TOP (5) * FROM KT15 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
+        cursor.execute("SELECT  * FROM KT15 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
         result = cursor.fetchall()
         cursor = connection.cursor()
         cursor.execute("SELECT MIN(TagValue), AVG(TagValue), MAX(TagValue) FROM KT15  WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s",[tag_name, q1, q2])
         dataRange = cursor.fetchall()
     elif table_name == 'KT19':
         cursor = connection.cursor()
-        cursor.execute("SELECT TOP (5) * FROM KT19 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
+        cursor.execute("SELECT  * FROM KT19 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
         result = cursor.fetchall()
         cursor = connection.cursor()
         cursor.execute("SELECT MIN(TagValue), AVG(TagValue), MAX(TagValue) FROM KT19  WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s",[tag_name, q1, q2])
         dataRange = cursor.fetchall()
     elif table_name == 'KT22':
         cursor = connection.cursor()
-        cursor.execute("SELECT TOP (5) * FROM KT22 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
+        cursor.execute("SELECT  * FROM KT22 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
         result = cursor.fetchall()
         cursor = connection.cursor()
         cursor.execute("SELECT MIN(TagValue), AVG(TagValue), MAX(TagValue) FROM KT22  WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s",[tag_name, q1, q2])
         dataRange = cursor.fetchall()
     elif table_name == 'GA05':
         cursor = connection.cursor()
-        cursor.execute("SELECT TOP (5) * FROM GA05 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
+        cursor.execute("SELECT  * FROM GA05 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
         result = cursor.fetchall()
         cursor = connection.cursor()
         cursor.execute("SELECT MIN(TagValue), AVG(TagValue), MAX(TagValue) FROM GA05  WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s",[tag_name, q1, q2])
         dataRange = cursor.fetchall()
     elif table_name == 'GA29':
         cursor = connection.cursor()
-        cursor.execute("SELECT TOP (5) * FROM GA29 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
+        cursor.execute("SELECT  * FROM GA29 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
         result = cursor.fetchall()
         cursor = connection.cursor()
         cursor.execute("SELECT MIN(TagValue), AVG(TagValue), MAX(TagValue) FROM GA29  WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s",[tag_name, q1, q2])
         dataRange = cursor.fetchall()
     elif table_name == 'FT01':
         cursor = connection.cursor()
-        cursor.execute("SELECT TOP (5) * FROM FT01 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
+        cursor.execute("SELECT  * FROM FT01 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s;",[tag_name, q1, q2])
         result = cursor.fetchall()
         cursor = connection.cursor()
         cursor.execute("SELECT MIN(TagValue), AVG(TagValue), MAX(TagValue) FROM FT01 WHERE TagName = %s AND RecordTime > %s AND RecordTime < %s",[tag_name, q1, q2])
@@ -359,8 +432,7 @@ def chartDateRange(request, table_name, tag_name, q1, q2, *args, **kwargs):
         temp_values.append(list[3])
     for list in result:
         date_values.append(list[4])
-    print(date_values)
-    print(temp_values)
+
     data = {
         'x': date_values,
         'y': temp_values,

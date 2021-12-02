@@ -45,7 +45,7 @@
           {% for result in result %}
         <tr style="color: #696969;">
           <td scope="row"><small class="text-muted">{{ result.0 }}</small></td>
-          <td><a href="{% url 'childAsset-data' db result.1  %}" style="color: black;">{{ result.1 }}</a></td>
+          <td><a href="{% url 'childAsset-data' db result.1  %}" style="color: #5bc0de;">{{ result.1 }}</a></td>
           <td>{{ result.3 }}</td>
           <td>{{ result.4 }}</td>
         </tr>
@@ -91,6 +91,7 @@
          <table style="width:40%; color: #cbd5db;">
            <tr>
              <td>Year-Month-Date <br>Example: 2021-10-01</td>
+             <td>WARNING! Searching long data periods may cause delayed graph loading!</td>
            </tr>
          </table>
        </div>
@@ -106,7 +107,7 @@
             {% for i in result %}
             {% ifchanged i.1 %}
             <li class="list-group-item list-group-item-dark" style="background-color: rgba(100,100,100,0.1)">
-              <a href="{% url 'childAsset-data' db i.1  %}" style="color:#cbd5db;">{{i.1}}</a>
+              <a href="{% url 'childAsset-data' db i.1  %}" style="color:#5bc0de;">{{i.1}}</a>
             </li>
             {% else %}
             {% endifchanged %}
