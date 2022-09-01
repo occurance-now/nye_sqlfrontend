@@ -93,10 +93,10 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'DJANGO_MSSQL',
-        'USER': 'DjangoUser',
-        'PASSWORD': 'Howland1844!',
-        'HOST': 'US40-SF-015\SQLEXPRESS',
+        'NAME': '***',
+        'USER': '*******',
+        'PASSWORD': '*******',
+        'HOST': '*******',
         'PORT': '',
 
         'OPTIONS': {
